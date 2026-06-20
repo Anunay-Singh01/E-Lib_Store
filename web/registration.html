@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Register – E-lib Store</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css" />
+    <style>
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+
+      body {
+        font-family: Arial, sans-serif;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #e8e6f0;
+      }
+
+      .page {
+        display: flex;
+        width: 820px;
+        min-height: 520px;
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: 0 6px 32px rgba(0,0,0,0.10);
+      }
+
+      .left-panel {
+        width: 42%;
+        background: #2e2b4a;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 48px 40px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .left-panel::before {
+        content: '';
+        position: absolute;
+        top: -80px; left: -80px;
+        width: 260px; height: 260px;
+        border-radius: 50%;
+        background: rgba(83,74,183,0.2);
+      }
+
+      .left-panel::after {
+        content: '';
+        position: absolute;
+        bottom: -60px; right: -60px;
+        width: 200px; height: 200px;
+        border-radius: 50%;
+        background: rgba(29,158,117,0.15);
+      }
+
+      .brand-icon {
+        width: 48px; height: 48px;
+        background: rgba(174,169,236,0.18);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 1.5rem;
+        position: relative;
+        z-index: 1;
+      }
+
+      .brand-icon i { font-size: 26px; color: #c8c4f0; }
+
+      .brand-name {
+        font-size: 22px;
+        font-weight: 600;
+        color: #eeedf8;
+        margin-bottom: 0.5rem;
+        position: relative;
+        z-index: 1;
+      }
+
+      .brand-tagline {
+        font-size: 14px;
+        color: #a8a4cc;
+        line-height: 1.7;
+        position: relative;
+        z-index: 1;
+      }
+
+      .perks {
+        margin-top: 2.5rem;
+        position: relative;
+        z-index: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+      }
+
+      .perk {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .perk-icon {
+        width: 32px; height: 32px;
+        border-radius: 8px;
+        background: rgba(174,169,236,0.15);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+      }
+
+      .perk-icon i { font-size: 16px; color: #c8c4f0; }
+      .perk-text { font-size: 13px; color: #a8a4cc; line-height: 1.4; }
+
+      .right-panel {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 40px;
+        background: #f2f0f7;
+      }
+
+      .form-container { width: 100%; max-width: 320px; }
+
+      .form-title {
+        font-size: 22px;
+        font-weight: 600;
+        color: #2e2b4a;
+        margin-bottom: 6px;
+      }
+
+      .form-subtitle {
+        font-size: 14px;
+        color: #7a7896;
+        margin-bottom: 1.8rem;
+      }
+
+      .field { margin-bottom: 1.1rem; }
+
+      .field label {
+        display: block;
+        font-size: 13px;
+        font-weight: 600;
+        color: #4a4868;
+        margin-bottom: 6px;
+      }
+
+      .input-wrap { position: relative; }
+
+      .input-wrap .icon-left {
+        position: absolute;
+        left: 12px; top: 50%;
+        transform: translateY(-50%);
+        font-size: 17px;
+        color: #9b99b8;
+        pointer-events: none;
+      }
+
+      .input-wrap input {
+        width: 100%;
+        height: 42px;
+        padding: 0 40px 0 38px;
+        border: 1px solid #d4d2e3;
+        border-radius: 8px;
+        background: #eceaf4;
+        color: #2e2b4a;
+        font-size: 14px;
+        font-family: Arial, sans-serif;
+        transition: border-color 0.15s, box-shadow 0.15s;
+        outline: none;
+      }
+
+      .input-wrap input:focus {
+        border-color: #6c63b8;
+        box-shadow: 0 0 0 3px rgba(108,99,184,0.12);
+        background: #ebe9f5;
+      }
+
+      .input-wrap input.invalid { border-color: #c0504a; }
+
+      .toggle-pw {
+        position: absolute;
+        right: 12px; top: 50%;
+        transform: translateY(-50%);
+        background: none;
+        border: none;
+        cursor: pointer;
+        color: #9b99b8;
+        padding: 0;
+        font-size: 17px;
+        line-height: 1;
+      }
+
+      .toggle-pw:hover { color: #6c63b8; }
+
+      .error-msg {
+        display: none;
+        font-size: 12px;
+        color: #c0504a;
+        margin-top: 4px;
+      }
+
+      .error-msg.visible { display: block; }
+
+      .submit-btn {
+        width: 100%;
+        height: 42px;
+        background: #4e4798;
+        color: #eeedf8;
+        border: none;
+        border-radius: 8px;
+        font-size: 15px;
+        font-weight: 600;
+        cursor: pointer;
+        font-family: Arial, sans-serif;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        margin-top: 1.5rem;
+        transition: background 0.15s, transform 0.1s;
+      }
+
+      .submit-btn:hover { background: #3b3478; }
+      .submit-btn:active { transform: scale(0.98); }
+      .submit-btn i { font-size: 18px; }
+
+      .divider {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin: 1.4rem 0 1.1rem;
+      }
+
+      .divider span { font-size: 12px; color: #b0aec8; white-space: nowrap; }
+
+      .divider::before,
+      .divider::after {
+        content: '';
+        flex: 1;
+        height: 1px;
+        background: #d4d2e3;
+      }
+
+      .login-link {
+        text-align: center;
+        font-size: 14px;
+        color: #7a7896;
+      }
+
+      .login-link a {
+        color: #6c63b8;
+        text-decoration: none;
+        font-weight: 600;
+      }
+
+      .login-link a:hover { text-decoration: underline; }
+
+      @media (max-width: 640px) {
+        .page { flex-direction: column; width: 95%; min-height: unset; }
+        .left-panel { width: 100%; padding: 32px 28px; }
+        .perks { display: none; }
+        .right-panel { padding: 32px 28px; }
+      }
+    </style>
+  </head>
+  <body>
+
+    <div class="page">
+
+      <div class="left-panel">
+        <div class="brand-icon"><i class="ti ti-building-library"></i></div>
+        <div class="brand-name">E-lib Store</div>
+        <div class="brand-tagline">Join our library community.<br>Thousands of real books, ready to borrow.</div>
+
+        <div class="perks">
+          <div class="perk">
+            <div class="perk-icon"><i class="ti ti-books"></i></div>
+            <div class="perk-text">Browse our physical book collection</div>
+          </div>
+          <div class="perk">
+            <div class="perk-icon"><i class="ti ti-bookmarks"></i></div>
+            <div class="perk-text">Reserve books before you visit</div>
+          </div>
+          <div class="perk">
+            <div class="perk-icon"><i class="ti ti-clipboard-list"></i></div>
+            <div class="perk-text">Track your borrowed and returned books</div>
+          </div>
+          <div class="perk">
+            <div class="perk-icon"><i class="ti ti-shield-check"></i></div>
+            <div class="perk-text">Secure member account, always private</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="right-panel">
+        <div class="form-container">
+          <h1 class="form-title">Create account</h1>
+          <p class="form-subtitle">Register as a member to borrow books.</p>
+
+          <form name="myForm" action="RegistrationChecker" method="post" onsubmit="return handleSubmit(event)" novalidate>
+
+            <div class="field">
+              <label for="username">Username</label>
+              <div class="input-wrap">
+                <i class="ti ti-user icon-left"></i>
+                <input type="text" id="username" name="username" placeholder="Choose a username" autocomplete="username" />
+              </div>
+              <span class="error-msg" id="username-err">Username cannot be empty.</span>
+            </div>
+
+            <div class="field">
+              <label for="userpassword">Password</label>
+              <div class="input-wrap">
+                <i class="ti ti-lock icon-left"></i>
+                <input type="password" id="userpassword" name="userpassword" placeholder="Create a password" autocomplete="new-password" />
+                <button type="button" class="toggle-pw" aria-label="Show password" onclick="togglePw(this)">
+                  <i class="ti ti-eye"></i>
+                </button>
+              </div>
+              <span class="error-msg" id="password-err">Password cannot be empty.</span>
+            </div>
+
+            <div class="field">
+              <label for="usermail">Email address</label>
+              <div class="input-wrap">
+                <i class="ti ti-mail icon-left"></i>
+                <input type="email" id="usermail" name="usermail" placeholder="abc@gmail.com" autocomplete="email" />
+              </div>
+              <span class="error-msg" id="email-err">Please enter a valid email.</span>
+            </div>
+
+            <div class="field">
+              <label for="usercontact">Contact number</label>
+              <div class="input-wrap">
+                <i class="ti ti-phone icon-left"></i>
+                <input type="tel" id="usercontact" name="usercontact" placeholder="10-digit mobile number" pattern="[0-9]{10}" maxlength="10" />
+              </div>
+              <span class="error-msg" id="contact-err">Enter a valid 10-digit number.</span>
+            </div>
+
+            <button type="submit" class="submit-btn">
+              <i class="ti ti-user-plus"></i>
+              Create account
+            </button>
+
+            <div class="divider"><span>already a member?</span></div>
+
+            <div class="login-link">
+              Have an account? <a href="login.html">Sign in</a>
+            </div>
+
+          </form>
+        </div>
+      </div>
+
+    </div>
+
+    <script>
+      function handleSubmit(e) {
+        var valid = true;
+
+        var u    = document.getElementById('username');
+        var p    = document.getElementById('userpassword');
+        var m    = document.getElementById('usermail');
+        var c    = document.getElementById('usercontact');
+
+        var uErr = document.getElementById('username-err');
+        var pErr = document.getElementById('password-err');
+        var mErr = document.getElementById('email-err');
+        var cErr = document.getElementById('contact-err');
+
+        [u, p, m, c].forEach(function(el) { el.classList.remove('invalid'); });
+        [uErr, pErr, mErr, cErr].forEach(function(el) { el.classList.remove('visible'); });
+
+        if (!u.value.trim()) {
+          u.classList.add('invalid'); uErr.classList.add('visible'); valid = false;
+        }
+        if (!p.value.trim()) {
+          p.classList.add('invalid'); pErr.classList.add('visible'); valid = false;
+        }
+        if (!m.value.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(m.value)) {
+          m.classList.add('invalid'); mErr.classList.add('visible'); valid = false;
+        }
+        if (!c.value.trim() || !/^[0-9]{10}$/.test(c.value)) {
+          c.classList.add('invalid'); cErr.classList.add('visible'); valid = false;
+        }
+
+        if (!valid) e.preventDefault();
+        return valid;
+      }
+
+      function togglePw(btn) {
+        var input = btn.closest('.input-wrap').querySelector('input');
+        var icon  = btn.querySelector('i');
+        if (input.type === 'password') {
+          input.type = 'text';
+          icon.className = 'ti ti-eye-off';
+          btn.setAttribute('aria-label', 'Hide password');
+        } else {
+          input.type = 'password';
+          icon.className = 'ti ti-eye';
+          btn.setAttribute('aria-label', 'Show password');
+        }
+      }
+    </script>
+
+  </body>
+</html>
