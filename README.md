@@ -111,7 +111,7 @@ e-libstore.sql;
 # How to Run
 
 1. Clone the repository:
-git clone https://github.com/Anunay-Singh01/your-repository-name.git
+git clone https://github.com/Anunay-Singh01/E-Lib_Store
 
 2. Open the project in NetBeans 8.2 (Developed and tested using only JDK 1.8)
 
