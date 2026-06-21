@@ -6,7 +6,6 @@ A web application that allows users to buy and sell books online. It is built up
 - Secure Authentication
 - View Available Books
 - Buy Books
-- Rent Books
 - View Profile
 - Update Profile Information
 
